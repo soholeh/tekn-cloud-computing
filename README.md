@@ -1,4 +1,3 @@
 # tekn-cloud-computing
 ---
-Muhammad Solehudin
-175610047
+Muhammad Solehudin (175610047)
