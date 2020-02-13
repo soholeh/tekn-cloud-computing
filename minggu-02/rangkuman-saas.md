@@ -64,10 +64,12 @@ Teknologi cloud seperti Microsoft Azure memungkinkan kita menyediakan server yan
 * Streaming data dan layanan pencarian
 
 Ilustrasi Kemampuan Solusi SaaS
-![ilu](/ilu.jpg)
+
+![ilu](ilu.jpg)
 
 **Kerugian dari Platform SaaS**
-![rugi](/rugi.jpg)
+
+![rugi](rugi.jpg)
 
 Kerugian dari plaform SaaS diantaranya adalah :
 1. Kurang kontrol
@@ -87,7 +89,8 @@ Kerugian dari plaform SaaS diantaranya adalah :
    Saat memilih produk SaaS, dan misalnya, dengan munculnya GDPR, bisnis harus memberikan perhatian khusus dalam hal di mana implementasi SaaS menyimpan data di cloud. Setiap yurisdiksi memiliki kebijakan legislatif sendiri dan bertindak ketika data sensitif diproses atau disimpan.
 
 **Komponen Kunci dari Platform SaaS**
-![key](/key.jpg)
+
+![key](key.jpg)
 
 1. Keamanan
 
@@ -102,7 +105,8 @@ Kerugian dari plaform SaaS diantaranya adalah :
    Sementara kita mungkin dapat memberikan solusi SaaS di luar kotak bagi sebagian besar konsumen yang menyertakan serangkaian fitur dan fungsi standar, perusahaan sering mengharapkan kustomisasi tambahan untuk menangani kasus penggunaan khusus untuk domain masalah khusus mereka. Anjak dalam diperpanjang untuk arsitektur SaaS kita adalah komponen penting lainnya untuk kita pertimbangkan. kita dapat melakukan ini dengan mengirimkan versi "label putih" dari produk SaaS kita atau dengan menerapkan mekanisme plugin yang memungkinkan bisnis dan / atau pengembang untuk memperluas solusi SaaS label putih kita.
 
 **Pertimbangan Desain untuk Platform SaaS**
-![des](/des.jpg)
+
+![des](des.jpg)
 
 * Skalabilitas
 
@@ -115,5 +119,40 @@ Kerugian dari plaform SaaS diantaranya adalah :
 * Multi-tenancy
 
    Agar perangkat lunak kita dikirimkan sebagai produk SaaS, itu harus mendukung multi-tenancy. Produk kita harus dapat mengakomodasi banyak pengguna sementara pada saat yang sama, memastikan bahwa data pengguna, privasi dan semuanya masih diperhatikan. Luangkan waktu untuk memasukkan faktor ini ke dalam desain arsitektur SaaS kita dan memastikan bahwa apa pun yang kita terapkan, memiliki model yang dapat diskalakan.
+***
+## 4. Cara membangun aplikasi SaaS berbasis cloud
 
+**1. Menggunakan bahasa pemrograman modern atau trend contoh Pyhton**
 
+**2. Menggunkaan database NoSQL MongoDB penggunaan basis data berorientasi document**
+
+**3. Sistem antrian menggunakan RabbitMQ**
+
+   RabbitMQ adalah sistem antrian sumber terbuka yang berjalan pada semua sistem operasi utama.
+   Sistem antrian pesan adalah protokol komunikasi yang tidak sinkron , memungkinkan pengirim dan penerima pesan tidak berinteraksi pada saat yang bersamaan. Juga dikenal sebagai teknologi Antrian Pesan (MSMQ) memungkinkan aplikasi web untuk berjalan pada waktu yang berbeda dan untuk berkomunikasi dengan berbagai integrasi pihak ketiga / API / dan layanan lainnya secara tidak sinkron.
+
+   ![ant](ant.jpg)
+
+   Sebuah pesan (mis. Kueri yang meminta layanan pihak ketiga melalui API) ditempatkan ke antrian. Itu disimpan di sana sampai penerima mengambilnya. Antrian pesan memiliki batasan mengenai ukuran dan jumlah data yang dikirim dalam antrian. Hal yang hebat tentang sistem antrian modern adalah bahwa mereka dapat diskalakan dengan mudah.
+
+**4. Menggunakan AWS & EC2**
+
+   AWS (Amazon Web Services) memungkinkan kita untuk meng-host dan menjalankan aplikasi web kita serta melakukan pekerjaan batch berkinerja tinggi. Dengan Elastic Compute Cloud (EC2) AWS menyediakan server virtual yang dapat diskalakan untuk setiap bisnis.
+
+   ![aws](aws.jpg)
+
+**5. Menggunakan Web Storage S3**
+
+   Amazon Simple Storage Service (S3) mudah digunakan, menyimpan dan mengambil data dalam jumlah berapa pun.
+
+**6. Menggunakan Content Delivery Network**
+
+   Content Delivery Network (CDN) atau dalam bahasa Indonesia jaringan pengiriman konten pada dasarnya adalah sebuah sistem server didistribusikan yang memungkinkan kita untuk melayani konten dengan pengguna aplikasi kita dengan kinerja tinggi dan ketersediaan tinggi.
+
+   ![cdn](cdn.jpg)
+
+**7. Mengatur aplikasi SaaS**
+
+   Dengan Python, MongoDB - sebagai basis data yang berorientasi pada dokumen, perangkat lunak RabbitMQ sebaiknya dilakukan dengan pengaturan dasar. 
+   
+**8. Memulai dengan pengujian perangkat lunak**
