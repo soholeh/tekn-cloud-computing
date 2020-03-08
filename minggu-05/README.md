@@ -4,6 +4,6 @@
 
 ---
 
-[2. Tugas, soon.](tugas-minggu-05.md)
+[2. Tugas, Create New Request Demo (ERP).](tugas.md)
 
 ---
