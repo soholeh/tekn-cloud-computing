@@ -4,6 +4,6 @@
 
 ---
 
-[2. Tugas, soon.](tugas.md)
+[2. Tugas, Couchbase image from DockerHub.](tugas.md)
 
 ---
