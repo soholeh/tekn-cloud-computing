@@ -1,6 +1,6 @@
 # Praktikum Minggu-08
 
-[1. Latihan, Cari apaan cieee.](latihan.md)
+[1. Latihan, Get started with Docker Compose.](latihan.md)
 
 ---
 

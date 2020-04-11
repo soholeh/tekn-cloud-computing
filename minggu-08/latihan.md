@@ -1,64 +1,112 @@
-# Praktikum Teknologi Cloud Computing - Minggu 7 (LATIHAN)
+# Praktikum Teknologi Cloud Computing - Minggu 8 (LATIHAN)
 
-## Installasi Docker 
+## Step 1: Setup
 
 ---
-![insdock](install-docker.png) 
-```
-Pastikan telah mendownload Docker Desktop Installer melalui link yang telah disediakan.
-Install Docker seperti terlihat pada gambar diatas.
-```
+1. Membuat folder proyek
+
+    ![gs1](gs-1.png)
+    ```
+    //Membuat folder baru dengan nama composetest
+    $ mkdir composetest
+
+    //Berpindah ke folder composetest
+    $ cd composetest/
+
+    //Membuka code editor vscode
+    $ code .
+    ```
+2. Membuat file app.py
+
+    ![gs2](gs-2.png)
+    >[File app.py](app.py)
+3. Membuat file requirements.txt
+
+    ![gs3](gs-3.png)
+    >[File requirements.txt](requirements.txt)
+
 ---
-## Setup dan Orientasi Docker
-
-![set](gs-docker-01.png)
-```
-//cek versi docker
-$ docker --version
-
-//menjalankan docker image hello-world
-$ docker run hello-world
-
-//menampilkan seluruh struktur daftar image hello-world
-$ docker container ls --all
-```
+## Step 2: Create a Dockerfile
 ---
-## Build and run image
-
-![bri](gs-docker-02.png)
-```
-//mengcloning repo berdasarkan url
-$ git clone https://github.com/dockersamples/node-bulletin-board
-
-//berpindah direktori
-$ cd node-bulletin-board/bulletin-board-app
-
-//build image docker
-$ docker image build -t bulletinboard:1.0 .
-
-//menjalankan container untuk melihat docker image nantinya secara local yakni pada localhost:8000
-$ docker container run --publish 8000:8080 --detach --name bb bulletinboard:1.0
-
-//menghapus container image
-$ docker container rm --force bb
-```
+![gs4](gs-4.png)
+>[File Dockerfile](Dockerfile)
 ---
-## Share image on Docker Hub
+## Step 3: Define services in a Compose file
 
-![share](gs-docker-03.png)
-```
-Sebelumnya kita harus membuat akun docker hub terlebih dahulu, jika sudah kita membuat repo baru dengan nama bulletinboard.
-
-//share image kita ke docker hub
-$docker image tag bulletinboard:1.0 soholeh/bulletinboard:1.0
-
-//push image kita ke docker hub
-$docker image push soholeh/bulletinboard:1.0
-
-Untuk soholeh dapat disesuaikan dengan username dockerhub kita masing-masing.
-Untuk bulletinboard:1.0 dapat disesuaikan juga pada image yg kita buat.
-
-Untuk melihat hasilnya kita dapat membuka tab baru dan isikan url dengan localhost:8000
-```
+![gs5](gs-5.png)
+>[File docker-compose.yml](docker-compose.yml)
 ---
+## Step 4: Build and run your app with Compose
+---
+1. Menjalankan perintah docker-compose up
 
+    ![gs6](gs-6.png)
+    ```
+    //Mulai menjalankan aplikasi
+    $ docker-compose up
+    ```
+2. Membuka url http://localhost:5000/ untuk melihat hasilnya
+
+    ![gs7](gs-7.png)
+3. Merefresh halaman
+
+    ![gs8](gs-8.png)
+4. Membuka terminal lain dan menjalankan perintah docker image ls
+
+    ![gs9](gs-9.png)
+    ```
+    //Melihat daftar lokal image
+    $ docker image ls
+    ```
+---
+## Step 5: Edit the Compose file to add a bind mount
+
+![gs10](gs-10.png)
+>[File docker-compose.yml](docker-compose.yml)
+---
+## Step 6: Re-build and run the app with Compose
+1. Menjalankan perintah docker-compose up
+
+    ![gs11](gs-11.png)
+    ```
+    //Mulai menjalankan aplikasi
+    $ docker-compose up
+    ```
+2. Mengecek pada browser
+
+    ![gs12](gs-12.png)
+
+---
+## Step 7: Update the application
+1. Merubah file app.py
+    ![gs13](gs-13.png)
+    >[File app.py](app.py)
+
+2. Mengecek hasilnya pada browser
+
+    ![gs14](gs-14.png)
+---
+## Step 8: Experiment with some other commands
+1. Menjalankan perintah docker lainnya
+
+    ![gs15](gs-15.png)
+    ```
+    //Menjalankan aplikasi pada latar belakang
+    $ docker-compose up -d
+
+    //Melihat aplikasi yang sedang berjalan
+    $ docker-compose ps
+    ```
+2. Menjalankan perintah docker lainnya
+
+    ![gs16](gs-16.png)
+    ```
+    //Menjalankan dan melihat variabel yang tersedia
+    $ docker-compose run web env
+
+    //Menghentikan aplikasi
+    $ docker-compose stop
+
+    //Menghapus containers
+    $ docker-compose down --volumes
+    ```
