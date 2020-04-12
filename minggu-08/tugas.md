@@ -1,21 +1,11 @@
-# Praktikum Teknologi Cloud Computing - Minggu 7 (TUGAS)
+# Praktikum Teknologi Cloud Computing - Minggu 8 (TUGAS)
 
 
-## Couchbase image from DockerHub
+## Diagram Keterkaitan antara Docker image, container, client, compose dan swarm.
 
 ---
-![tgs](dcimg.png)
-```
-//pull library couchbase
-$ docker pull couchbase
+![docker](docker.png)
 
-//menghapus container image
-$ docker container rm --force db
+Docker compose memiliki tujuan agar dapat menjalankan multi-containers yang dapat disetting pada file yml, untuk dapat menjalankannya dapat melalui client dengan perintah-perintah yang ada lalu untuk mengatur dan mengelompokkan container tersebut juga dapat diatur dengan docker swarm output yang didapatkan berupa image.
 
-//run couchbase Server docker container
-$ docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase
-
-Untuk melihat hasilnya kita dapat membuka tab baru dan isikan url dengan http://localhost:8091
-
-```
 ---

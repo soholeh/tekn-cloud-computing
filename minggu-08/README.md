@@ -4,6 +4,6 @@
 
 ---
 
-[2. Tugas, wait.](tugas.md)
+[2. Tugas, Diagram keterkaitan.](tugas.md)
 
 ---
