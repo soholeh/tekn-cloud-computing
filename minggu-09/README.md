@@ -1,5 +1,5 @@
-# Praktikum Minggu-08
+# Praktikum Minggu-09
 
-[1. Latihan, .](latihan.md)
+[1. Latihan, Docker for Beginners - Linux.](latihan.md)
 
 ---
