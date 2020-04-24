@@ -66,6 +66,7 @@ $ brctl show
 $ ip a
 ```
 **Step 2: Connect a container**
+
 ![dnh-11](dnh-11.png)
 ![dnh-12](dnh-12.png)
 ![dnh-13](dnh-13.png)
@@ -113,6 +114,7 @@ $ exit
 $ docker stop yourcontainerid
 ```
 **Step 4: Configure NAT for external connectivity**
+
 ![dnh-20](dnh-20.png)
 ![dnh-21](dnh-21.png)
 ![dnh-22](dnh-22.png)
@@ -130,6 +132,7 @@ $ curl 127.0.0.1:8080
 ## Section #3 - Overlay Networking
 ---
 **Step 1: The Basics**
+
 ![dnh-23](dnh-23.png)
 ![dnh-24](dnh-24.png)
 ![dnh-25](dnh-25.png)
@@ -146,6 +149,7 @@ $ docker swarm join \
 $ docker node ls
 ```
 **Step 2: Create an overlay network**
+
 ![dnh-26](dnh-26.png)
 ![dnh-27](dnh-27.png)
 ![dnh-28](dnh-28.png)
@@ -185,6 +189,7 @@ $ docker network ls
 $ docker network inspect overnet
 ```
 **Step 4: Test the network**
+
 ![dnh-34](dnh-34.png)
 ![dnh-35](dnh-35.png)
 ```
