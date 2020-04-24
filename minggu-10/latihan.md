@@ -1,170 +1,213 @@
-# Praktikum Teknologi Cloud Computing - Minggu 10 (Docker for Beginners - Linux)
+# Praktikum Teknologi Cloud Computing - Minggu 10 (Docker Networking)
 
 ## Login akun Docker
 
 ---
-![dfb-1](dfb-1.png)
+![dnh-1](dnh-1.png)
 
 Untuk dapat mengakses terminal linux pada web ini yakni dengan login terlebih dahulu menggunakan akun Docker kita.
 
 ---
-## Task 0: Prerequisites
+## Section #1 - Networking Basics
 ---
-Meng-clone repo dari github dengan nama linux_tweet_app pada akun dockersamples.
+**Step 1: The Docker Network Command**
 
-![dfb-2](dfb-2.png)
+![dnh-2](dnh-2.png)
+```
+//Merupakan perintah utama untuk konfigurasi dan mengelola container networks
+$ docker network
+```
 
+**Step 2: List networks**
+
+![dnh-3](dnh-3.png)
+```
+//Menampilkan daftar container networks
+$ docker network ls
+```
+**Step 3: Inspect a network**
+
+![dnh-4](dnh-4.png)
+```
+//Melihat detail konfigurasi jaringan
+$ docker network inspect bridge
+```
+**Step 4: List network driver plugins**
+
+![dnh-5](dnh-5.png)
+```
+//Melihat informasi mengenai installasi Docker
+$ docker info
+```
 ---
-## Task 1: Run some simple Docker containers
-
-**Run a single task in an Alpine Linux container**
-1. Memulai container baru dengan image alpine
-
-    ![dfb-3](dfb-3.png)
-
-2. Melihat daftar semua container yang ada
-
-    ![dfb-4](dfb-4.png)
-
-**Run an interactive Ubuntu container**
-1. Menjalankan Docker container dan mengakses terminal ubuntu
-
-    ![dfb-5](dfb-5.png)
-2. Menjalankan perintah berikut.
-
-    ![dfb-6](dfb-6.png)
-    ```
-    //Menampilkan daftar folder atau file yang ada
-    $ ls /
-
-    //Menampilkan proses container yang sedang berjalan
-    $ ps aux
-
-    //Menampilkan distro linux yang container yang digunakan
-    $ cat /etc/issue
-    ```
-3. Keluar dari terminal ubuntu
-
-    ![dfb-7](dfb-7.png)
-
-4. Cek versi host VM
-
-    ![dfb-8](dfb-8.png)
-
-**Run a background MySQL container**
-
-1. Menjalankan MySQL container
-
-    ![dfb-9](dfb-9.png)
-
-2. Melihat daftar container
-
-    ![dfb-10](dfb-10.png)
-
-3. Cek log dan proses yang berjalan didalam container 
-
-    ![dfb-11](dfb-11.png)
-    ![dfb-12](dfb-12.png)
-
-4. Melihat versi MySQL yang digunakan
-
-    ![dfb-13](dfb-13.png)
-
-5. Menghubungkan terminal ke sh
-
-    ![dfb-14](dfb-14.png)
+## Section #2 - Bridge Networking
 ---
-## Task 2: Package and run a custom app using Docker
+**Step 1: The Basics**
+
+![dnh-6](dnh-6.png)
+![dnh-7](dnh-7.png)
+![dnh-8](dnh-8.png)
+![dnh-9](dnh-9.png)
+![dnh-10](dnh-10.png)
+```
+//Menampilkan daftar container networks
+$ docker network ls
+
+//Mengupdate dan install packages bridge-utils
+$ apk update
+
+//Menambahkan packages bridge-utils
+$ apk add bridge
+
+//Menampilkan daftar bridges pada Docker host 
+$ brctl show
+
+//Melihat detail bridge
+$ ip a
+```
+**Step 2: Connect a container**
+![dnh-11](dnh-11.png)
+![dnh-12](dnh-12.png)
+![dnh-13](dnh-13.png)
+![dnh-14](dnh-14.png)
+```
+//Membuat container baru
+$ docker run -dt ubuntu sleep infinity
+
+//Melihat spek container network
+$ docker ps
+
+//Menampilkan daftar bridges pada Docker host 
+$ brctl show
+
+//Menampilkan lampiran pada container bridge
+$ docker network inspect bridge
+```
+**Step 3: Test network connectivity**
+
+![dnh-15](dnh-15.png)
+![dnh-16](dnh-16.png)
+![dnh-17](dnh-17.png)
+![dnh-18](dnh-18.png)
+![dnh-19](dnh-19.png)
+```
+//Mengetes jaringan (ping)
+$ ping -c5 172.17.0.2
+
+//Melihat spek container network
+$ docker ps
+
+//Masuk terminal ubuntu
+$ docker exec -it yourcontainerid /bin/bash
+
+//Menginstall program ping
+$ apt-get update && apt-get install -y iputils-ping
+
+//Mengetes jaringan (ping)
+$ ping -c5 www.github.com
+
+//Keluar dari terminal ubuntu
+$ exit
+
+//Menghentikan container yang sedang berjalan
+$ docker stop yourcontainerid
+```
+**Step 4: Configure NAT for external connectivity**
+![dnh-20](dnh-20.png)
+![dnh-21](dnh-21.png)
+![dnh-22](dnh-22.png)
+```
+//Menjalankan container baru dari official NGINX image
+$ docker run --name web1 -d -p 8080:80 nginx
+
+//Melihat spek container network
+$ docker ps
+
+//Menghubungkan ke docker host
+$ curl 127.0.0.1:8080
+```
 ---
-**Build a simple website image**
-1. Berpindah ke direktori repo yang telah di-clone sebelumnya
-
-    ![dfb-15](dfb-15.png)
-    ```
-    //Melihat isi dari Dockerfile
-    $ cat Dockerfile
-    ```
-2. Mengexport variabel dockerid dengan isian id docker kita
-
-    ![dfb-16](dfb-16.png)
-    ```
-    //Menampilkan isi dari variabel dockerid
-    $ echo $DOCKERID
-    ```
-3. Membuat docker image
-
-    ![dfb-17](dfb-17.png)
-4. Menjalankan container untuk menghosting image yang telah dibuat
-
-    ![dfb-18](dfb-18.png)
-
-5. Mengecek hasilnya dengan menekan link yang telah disediakan
-
-    ![dfb-19](dfb-20.png)
-    ![dfb-20](dfb-19.png)
-
-6. Menghentikan dan menghapus container lalu mengeceknya
-
-    ![dfb-21](dfb-40.png)
-    ![dfb-22](dfb-21.png)
+## Section #3 - Overlay Networking
 ---
-## Task 3: Modify a running website
-**Start our web app with a bind mount**
-1. Menjalankan container untuk menghosting image yang telah dibuat
+**Step 1: The Basics**
+![dnh-23](dnh-23.png)
+![dnh-24](dnh-24.png)
+![dnh-25](dnh-25.png)
+```
+//Menginisialisasi docker swarm baru
+$ docker swarm init --advertise-addr $(hostname -i)
 
-    ![dfb-23](dfb-22.png)
+//Menggabungkan node
+$ docker swarm join \
+>     --token SWMTKN-1-69b2x1u2wtjdmot0oqxjw1r2d27f0lbmhfxhvj83chln1l6es5-37ykdpul0vylenefe2439cqpf \
+>     10.0.0.5:2377
 
-2. Mengecek bahwasanya image berhasil di hosting dengan menekan link yang telah disediakan
+//Melihat daftar node
+$ docker node ls
+```
+**Step 2: Create an overlay network**
+![dnh-26](dnh-26.png)
+![dnh-27](dnh-27.png)
+![dnh-28](dnh-28.png)
+![dnh-29](dnh-29.png)
+```
+//Membuat sebuah overlay network
+$ docker network create -d overlay overnet
 
-    ![dfb-24](dfb-23.png)
-    ![dfb-25](dfb-24.png)
+//Mengecek/menampilkan network
+$ docker network ls
 
-**Modify the running website**
-1. Meng-kopi index.html container dan merefresh web sblmnya untuk melihat hasilnya
+//Melihat lebih detail informasi mengenai overnet network
+$ docker network inspect overnet
+```
+**Step 3: Create a service**
 
-    ![dfb-26](dfb-25.png)
-    ![dfb-27](dfb-26.png)
+![dnh-30](dnh-30.png)
+![dnh-31](dnh-31.png)
+![dnh-32](dnh-32.png)
+![dnh-33](dnh-33.png)
+```
+//Membuat layanan baru
+$ docker service create --name myservice \
+--network overnet \
+--replicas 2 \
 
-2. Menghentikan dan menghapus container dan mengeceknya
+//Mengecek/menampilkan daftar layanan
+$ docker service ls
 
-    ![dfb-28](dfb-27.png)
-    ![dfb-29](dfb-28.png)
+//Melihat daftar layanan yang sedang berjalan
+$ docker service ps myservice
 
-**Update the image**
-1. Membuat image baru
+//Mengecek/menampilkan network
+$ docker network ls
 
-    ![dfb-30](dfb-29.png)
+//Melihat lebih detail informasi mengenai overnet network
+$ docker network inspect overnet
+```
+**Step 4: Test the network**
+![dnh-34](dnh-34.png)
+![dnh-35](dnh-35.png)
+```
+//Melihat lebih detail informasi mengenai overnet network
+$ docker network inspect overnet
 
-2. Melihat daftar image yang ada
+//Melihat spek container network
+$ docker ps
+```
+---
+## Cleaning Up
 
-    ![dfb-31](dfb-30.png)
+![dnh-36](dnh-36.png)
+![dnh-37](dnh-37.png)
+![dnh-38](dnh-38.png)
+```
+//Menghspus layanan
+$ docker service rm myservice
 
-**Test the new version**
-1. Menjalankan container dan melihat hasilnya
+//Melihat spek container network
+$ docker ps
 
-    ![dfb-32](dfb-31.png)
-    ![dfb-33](dfb-32.png)
-
-2. Menjalankan container lainnya dan melihat hasilnya
-
-    ![dfb-34](dfb-33.png)
-    ![dfb-35](dfb-34.png)
-
-**Push your images to Docker Hub**
-1. Melihat daftar image yang telah di hosting
-
-    ![dfb-36](dfb-35.png)
-
-2. Sebelumnya login menggunakan akun docker kita agar tepat dan lancar di push atau upload pada akun docker kita
-
-    ![dfb-37](dfb-36.png)
-
-3. Push image versi 1.0 dan 2.0
-
-    ![dfb-38](dfb-37.png)
-    ![dfb-39](dfb-38.png)
-
-4. Melihat hasil image yang telah di push pada akun docker hub kita masing-masing
-
-    ![dfb-40](dfb-39.png)
+//Menghapus node
+$ docker swarm leave --force
+```
 ---
